@@ -1,0 +1,20 @@
+== Description
+A ripl plugin that smooths the transition to irb by stubbing out any IRB method or subclass called.
+
+== Install
+Install the gem with:
+
+    sudo gem install ripl-irb
+
+== Usage
+
+From the commandline
+
+    $ ripl -rripl/irb
+
+Or add to your ~/.riplrc
+
+    require 'ripl/irb'
+
+== Todo
+* Point to ripl plugins which implement irb functionality called
