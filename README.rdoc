@@ -1,5 +1,5 @@
 == Description
-A ripl plugin that smooths the transition to irb by stubbing out any IRB method or subclass called.
+A ripl plugin that smooths the transition from irb by stubbing out any IRB method or subclass called.
 
 == Install
 Install the gem with:
