@@ -8,7 +8,8 @@ module Ripl
     end
 
     def mock_irb
-      Object.const_set(:IRB, Module.new).extend MockIrb
+      mod = Object.const_set(:IRB, Module.new).extend(MockIrb)
+      class <<mod; self end.send(:define_method, :conf) { {} }
     end
 
     module MockIrb
