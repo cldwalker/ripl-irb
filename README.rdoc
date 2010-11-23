@@ -1,5 +1,6 @@
 == Description
-A ripl plugin that smooths the transition from irb by stubbing out any IRB method or subclass called.
+A ripl plugin that smooths the transition from irb by mocking out IRB. Safely captures all IRB calls
+and points to ripl equivalents for irb's config options and commands.
 
 == Install
 Install the gem with:
@@ -16,5 +17,11 @@ Or add to your ~/.riplrc
 
     require 'ripl/irb'
 
-== Todo
-* Point to ripl plugins which implement irb functionality called
+When your mocked out IRB encounters a ripl equivalent, it prints a message:
+
+  # When encountering a IRB.config[:HISTORY_FILE]
+  Use Ripl.config[:history] instead of IRB.config[:HISTORY_FILE]
+
+To disable printing these messages:
+
+  Ripl.config[:irb_verbose] = false
