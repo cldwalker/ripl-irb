@@ -43,8 +43,31 @@ module Ripl
       def method_missing(*)
       end
     end
+
+    module Commands
+      JUMP_COMMANDS = [:bindings, :cb, :chws, :cws, :cwws, :fg, :irb, :irb_bindings, :irb_cb,
+        :irb_change_binding, :irb_change_workspace, :irb_chws, :irb_current_working_binding,
+        :irb_current_working_workspace, :irb_cwb, :irb_cws, :irb_cwws, :irb_exit, :irb_fg,
+        :irb_jobs, :irb_kill, :irb_pop_binding, :irb_pop_workspace, :irb_popb, :irb_popws,
+        :irb_print_working_binding, :irb_print_working_workspace, :irb_push_binding,
+        :irb_push_workspace, :irb_pushb, :irb_pushws, :irb_pwb, :irb_pwws, :irb_workspaces, :jobs,
+        :kill, :popb, :popws, :pushb, :pushws, :pwws, :workspaces]
+
+      (JUMP_COMMANDS - Ripl::Commands.instance_methods.map {|e| e.to_sym }).each do |meth|
+        define_method(meth) do
+          puts "See jump() and jumps() in ripl-commands plugin" if Ripl.config[:irb_verbose]
+        end
+      end
+
+      [:conf, :irb_context, :context].each do |meth|
+        define_method(meth) do
+          puts "See config() in ripl-commands plugin" if Ripl.config[:irb_verbose]
+        end
+      end
+    end
   end
 end
 
 Ripl::Shell.send :include, Ripl::Irb
+Ripl::Commands.send :include, Ripl::Irb::Commands
 Ripl.config[:irb_verbose] = true
