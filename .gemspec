@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = "gabriel.horner@gmail.com"
   s.homepage    = "http://github.com/cldwalker/ripl-irb"
   s.summary = "A ripl plugin to smooth the transition from irb"
-  s.description =  "A ripl plugin that smooths the transition from irb by stubbing out any IRB method or subclass called."
+  s.description =  "A ripl plugin that smooths the transition from irb by mocking out IRB. Safely captures all IRB calls and points to ripl equivalents for irb's commands and config options."
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = 'tagaholic'
   s.add_dependency 'ripl', '>= 0.2.5'
