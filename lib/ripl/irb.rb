@@ -16,6 +16,8 @@ module Ripl
     DESC_MAP = {
       :SINGLE_IRB => "jump commands in ripl-commands plugin have this enabled by default",
       :IRB_RC => "Use ripl-after_rc plugin instead of IRB.conf[:IRB_RC]",
+      :AUTO_INDENT => 'Use ripl-auto_indent plugin instead of IRB.conf[:AUTO_INDENT]',
+      :SCRIPT => 'Use ripl-play plugin instead of IRB.conf[:SCRIPT]',
       :RC_NAME_GENERATOR => "Use Ripl.config[:history] or Ripl.config[:irbrc] "+
         "instead of IRB.conf[:RC_NAME_GENERATOR]",
       :LOAD_MODULES => 'No need for irb or ripl to do this. Just use require :)'
