@@ -20,7 +20,9 @@ module Ripl
       :SCRIPT => 'Use ripl-play plugin instead of IRB.conf[:SCRIPT]',
       :RC_NAME_GENERATOR => "Use Ripl.config[:history] or Ripl.config[:irbrc] "+
         "instead of IRB.conf[:RC_NAME_GENERATOR]",
-      :LOAD_MODULES => 'No need for irb or ripl to do this. Just use require :)'
+      :LOAD_MODULES => 'No need for irb or ripl to do this. Just use require :)',
+      :HISTORY_SIZE => 'See http://github.com/cldwalker/ripl-misc for IRB.conf[:HISTORY_SIZE]',
+      :MATH_MODE => 'See http://github.com/cldwalker/ripl-misc for IRB.conf[:MATH_MODE]'
     }
 
     def mock_irb
