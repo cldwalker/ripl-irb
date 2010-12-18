@@ -9,26 +9,34 @@ module Ripl
       super
     end
 
-    CONFIG_MAP = {
-      :PROMPT_MODE => :prompt, :PROMPT => :prompt, :HISTORY_FILE => :history,
-      :USE_READLINE => :readline, :AP_NAME => :name, :RC => :irbrc
-    }
-    DESC_MAP = {
-      :SINGLE_IRB => "jump commands in ripl-commands plugin have this enabled by default",
-      :IRB_RC => "Use ripl-after_rc plugin instead of IRB.conf[:IRB_RC]",
-      :AUTO_INDENT => 'Use ripl-auto_indent plugin instead of IRB.conf[:AUTO_INDENT]',
-      :SCRIPT => 'Use ripl-play plugin instead of IRB.conf[:SCRIPT]',
-      :RC_NAME_GENERATOR => "Use Ripl.config[:history] or Ripl.config[:irbrc] "+
-        "instead of IRB.conf[:RC_NAME_GENERATOR]",
-      :LOAD_MODULES => 'No need for irb or ripl to do this. Just use require :)',
-      :HISTORY_SIZE => 'See http://github.com/cldwalker/ripl-misc for IRB.conf[:HISTORY_SIZE]',
-      :MATH_MODE => 'See http://github.com/cldwalker/ripl-misc for IRB.conf[:MATH_MODE]'
-    }
-
     def mock_irb
       mod = Object.const_set(:IRB, Module.new).extend(MockIrb)
-      conf = {}
-      def conf.[]=(key, val)
+      conf = {}.extend ConvertIrb
+      class <<mod; self end.send(:define_method, :conf) { conf }
+    end
+
+    module ConvertIrb
+      CONFIG_MAP = {
+        :PROMPT_MODE => :prompt, :PROMPT => :prompt, :HISTORY_FILE => :history,
+        :USE_READLINE => :readline, :AP_NAME => :name, :RC => :irbrc
+      }
+      DESC_MAP = {
+        :SINGLE_IRB => "jump commands in ripl-commands plugin have this enabled by default",
+        :IRB_RC => "Use ripl-after_rc plugin instead of IRB.conf[:IRB_RC]",
+        :AUTO_INDENT => 'Use ripl-auto_indent plugin instead of IRB.conf[:AUTO_INDENT]',
+        :SCRIPT => 'Use ripl-play plugin instead of IRB.conf[:SCRIPT]',
+        :RC_NAME_GENERATOR => "Use Ripl.config[:history] or Ripl.config[:irbrc] "+
+          "instead of IRB.conf[:RC_NAME_GENERATOR]",
+        :LOAD_MODULES => 'No need for irb or ripl to do this. Just use require :)',
+        :HISTORY_SIZE => 'See http://github.com/cldwalker/ripl-misc for IRB.conf[:HISTORY_SIZE]',
+        :MATH_MODE => 'See http://github.com/cldwalker/ripl-misc for IRB.conf[:MATH_MODE]'
+      }
+
+      def []=(key, val)
+        self[key]
+      end
+
+      def [](key)
         return unless Ripl.config[:irb_verbose]
         if ripl_key = CONFIG_MAP[key]
           puts "Use Ripl.config[#{ripl_key.inspect}] instead of IRB.conf[#{key.inspect}]"
@@ -36,7 +44,6 @@ module Ripl
           puts desc
         end
       end
-      class <<mod; self end.send(:define_method, :conf) { conf }
     end
 
     module MockIrb
