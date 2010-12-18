@@ -20,6 +20,7 @@ module Ripl
         :PROMPT_MODE => :prompt, :PROMPT => :prompt, :HISTORY_FILE => :history,
         :USE_READLINE => :readline, :AP_NAME => :name, :RC => :irbrc
       }
+
       DESC_MAP = {
         :SINGLE_IRB => "jump commands in ripl-commands plugin have this enabled by default",
         :IRB_RC => "Use ripl-after_rc plugin instead of IRB.conf[:IRB_RC]",
@@ -27,9 +28,14 @@ module Ripl
         :SCRIPT => 'Use ripl-play plugin instead of IRB.conf[:SCRIPT]',
         :RC_NAME_GENERATOR => "Use Ripl.config[:history] or Ripl.config[:irbrc] "+
           "instead of IRB.conf[:RC_NAME_GENERATOR]",
+        :MAIN_CONTEXT => 'Use Ripl.shell instead of IRB.conf[:MAIN_CONTEXT]',
         :LOAD_MODULES => 'No need for irb or ripl to do this. Just use require :)',
-        :HISTORY_SIZE => 'See http://github.com/cldwalker/ripl-misc for IRB.conf[:HISTORY_SIZE]',
-        :MATH_MODE => 'See http://github.com/cldwalker/ripl-misc for IRB.conf[:MATH_MODE]'
+        :SAVE_HISTORY => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/history_size.rb for IRB.conf[:SAVE_HISTORY]',
+        :MATH_MODE => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/math.rb for IRB.conf[:MATH_MODE]',
+        :ECHO => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/echo.rb for IRB.conf[:ECHO]',
+        :INSPECT_MODE => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/inspect.rb for IRB.conf[:INSPECT_MODE]',
+        :BACK_TRACE_LIMIT => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/backtrace_limit.rb for IRB.conf[:BACK_TRACE_LIMIT]',
+        :IGNORE_SIGINT => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/ignore_sigint.rb for IRB.conf[:IGNORE_SIGINT]'
       }
 
       def []=(key, val)
