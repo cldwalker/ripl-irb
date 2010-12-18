@@ -2,7 +2,7 @@ require 'ripl'
 
 module Ripl
   module Irb
-    VERSION = '0.2.0'
+    VERSION = '0.2.1'
 
     def before_loop
       mock_irb
