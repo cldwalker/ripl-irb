@@ -29,7 +29,7 @@ module Ripl
         :RC_NAME_GENERATOR => "Use Ripl.config[:history] or Ripl.config[:irbrc] "+
           "instead of IRB.conf[:RC_NAME_GENERATOR]",
         :MAIN_CONTEXT => 'Use Ripl.shell instead of IRB.conf[:MAIN_CONTEXT]',
-        :LOAD_MODULES => 'No need for irb or ripl to do this. Just use require :)',
+        :LOAD_MODULES => 'No need to use IRB.conf[:LOAD_MODULES]. Just use require :)',
         :SAVE_HISTORY => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/history_size.rb for IRB.conf[:SAVE_HISTORY]',
         :MATH_MODE => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/math.rb for IRB.conf[:MATH_MODE]',
         :ECHO => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/echo.rb for IRB.conf[:ECHO]',
@@ -43,12 +43,14 @@ module Ripl
       end
 
       def [](key)
-        return unless Ripl.config[:irb_verbose]
+        rval = key == :LOAD_MODULES ? [] : nil
+        return rval unless Ripl.config[:irb_verbose]
         if ripl_key = CONFIG_MAP[key]
           puts "Use Ripl.config[#{ripl_key.inspect}] instead of IRB.conf[#{key.inspect}]"
         elsif desc = DESC_MAP[key]
           puts desc
         end
+        rval
       end
     end
 
