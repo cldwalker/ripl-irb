@@ -30,3 +30,7 @@ When you invoke an irb command, you'll get pointed to a similar ripl command:
 To disable printing these messages:
 
     Ripl.config[:irb_verbose] = false
+
+== Credits
+
+* @me for IRB.conf[:LOAD_MODULES] patch
