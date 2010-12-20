@@ -38,19 +38,24 @@ module Ripl
         :IGNORE_SIGINT => 'See https://github.com/cldwalker/ripl-misc/blob/master/lib/ripl/ignore_sigint.rb for IRB.conf[:IGNORE_SIGINT]'
       }
 
+      RETURN_MAP = {
+        :LOAD_MODULES => [], :IRB_RC => lambda { }, :RC_NAME_GENERATOR => lambda { },
+        :SAVE_HISTORY => 500, :PROMPT => {}, :HISTORY_FILE => ''
+      }
+
       def []=(key, val)
         self[key]
+        val
       end
 
       def [](key)
-        rval = key == :LOAD_MODULES ? [] : nil
-        return rval unless Ripl.config[:irb_verbose]
+        return RETURN_MAP[key] unless Ripl.config[:irb_verbose]
         if ripl_key = CONFIG_MAP[key]
           puts "Use Ripl.config[#{ripl_key.inspect}] instead of IRB.conf[#{key.inspect}]"
         elsif desc = DESC_MAP[key]
           puts desc
         end
-        rval
+        RETURN_MAP[key]
       end
     end
 
