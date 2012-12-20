@@ -1,5 +1,8 @@
 require 'ripl'
 
+module IRB
+end
+
 module Ripl
   module Irb
     VERSION = '0.2.2'
