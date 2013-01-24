@@ -60,8 +60,14 @@ module Ripl
     end
 
     module MockIrb
+      ACTUAL_IRB_CLASSES = [:Irb]
       def const_missing(*args)
-        self.const_set(args[0], Module.new.extend(MockIrb))
+        mock = if ACTUAL_IRB_CLASSES.include?(args[0])
+          Class.new.extend(MockIrb)
+        else
+          Module.new.extend(MockIrb)
+        end
+        self.const_set(args[0], mock)
       end
 
       def method_missing(*)
